@@ -8,7 +8,10 @@ const cors = require("cors");
 const db = require("./Models");
 //
 const Role = db.role;
-db.sequelize.sync();
+db.sequelize.sync({ force: true }).then(() => {
+  console.log("Drop and Resync Db");
+  initial();
+});
 
 // Set up port config for express
 const PORT = process.env.PORT || 5000;
