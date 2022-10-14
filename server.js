@@ -5,7 +5,10 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const db = require("./Models/index");
+const db = require("./Models");
+//
+const Role = db.role;
+db.sequelize.sync();
 
 // Set up port config for express
 const PORT = process.env.PORT || 5000;
@@ -29,6 +32,17 @@ app.use(cookieParser());
 app.get("/", (req, res) => {
   res.json({ message: "The app is working!" });
 });
+
+function initial() {
+  Role.create({
+    id: 1,
+    name: "user",
+  });
+  Role.create({
+    id: 2,
+    name: "admin",
+  });
+}
 
 // Listen to server connection
 app.listen(PORT, () => {
