@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const db = require("./Models/index");
 
 // Set up port config for express
 const PORT = process.env.PORT || 5000;
@@ -13,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 
 // Use CORS options
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 // Create middleware
 app.use(express.json());
