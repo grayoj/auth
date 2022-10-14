@@ -1,33 +1,45 @@
-// import the orm
-const { Sequelize, DataTypes } = require("sequelize");
+// Declare and import config
+const config = require("../Config/db.config");
+// Init sequelize
+const Sequelize = require("sequelize");
 
-// Database connection to postgres.
-// Default Port for Postgres is 5433
-// Database name is: pencom-arc
+const sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
+  host: config.HOST,
+  dialect: config.dialect,
+  operatorAliases: false,
+  pool: {
+    max: config.pool.max,
+    min: config.pool.min,
+    acquire: config.pool.acquire,
+    idle: config.pool.idle,
+  },
+});
 
-const sequelize = new Sequelize(
-  `postgres://postgres:admin@127.0.0.1:5432/pencom-arc, 
-    {dialect: "postgres"}`
-);
-
-// Validate connection
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log(`Connected to the pencom-arc`);
-  })
-  .catch((errors) => {
-    // Catch errors
-    console.log(errors);
-  });
-
-// Create a sequelize instance for const db
 const db = {};
+
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-// connect to the model
-db.users = require("./userModel")(sequelize, DataTypes);
+db.user = require("../Models/userModel")(sequelize, Sequelize);
 
-// export module
+db.role = require("../Models/roleModel")(sequelize, Sequelize);
+// Associate User and Roles using a many to many
+// relationship, where a user can have several roles
+// a role could be occupied by many users
+db.role.belongsToMany(db.user, {
+  through: "user_roles",
+  foreignKey: "roleId",
+
+  OtherKey: "userId",
+});
+
+db.user.belongsToMany(db.role, {
+  through: "user_roles",
+  foreignKey: "userId",
+
+  OtherKey: "roleId",
+});
+
+db.ROLES = ["user", "admin"];
+
 module.exports = db;
