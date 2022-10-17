@@ -1,13 +1,13 @@
 // Controller Access Exports.
 
-exports.allAccess = (req, res) => {
+exports.publicAccess = (req, res) => {
   res.status(200).send("Content.");
 };
 
-exports.userBoard = (req, res) => {
+exports.userSection = (req, res) => {
   res.status(200).send("User Content.");
 };
 
-exports.adminBoard = (req, res) => {
+exports.adminSection = (req, res) => {
   res.status(200).send("Admin Content.");
 };
