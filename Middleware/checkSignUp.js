@@ -51,8 +51,8 @@ checkRoles = (req, res, next) => {
 
 // Validate signup
 const validateSignUp = {
-  checkDuplicateUsernameOrEmail: checkDuplicateUsernameOrEmail,
-  checkRolesExisted: checkRolesExisted,
+  checkEmailAndUsername: checkEmailAndUsername,
+  checkRoles: checkRoles,
 };
 
 module.exports = validateSignUp;

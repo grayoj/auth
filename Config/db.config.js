@@ -1,10 +1,10 @@
 // Database Configs
 module.exports = {
   HOST: "localhost",
-  USER: "postgres",
+  USER: "admin",
   PASSWORD: "admin",
-  DB: "pencom-arc",
-  dialect: "postgres",
+  DB: "pencom-acr",
+  dialect: "mysql",
   pool: {
     max: 5,
     min: 0,

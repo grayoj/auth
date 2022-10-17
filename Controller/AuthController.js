@@ -1,6 +1,6 @@
 // Require models
 const db = require("../models");
-const config = require("../config/auth.config");
+const config = require("../Config/key.config");
 const User = db.user;
 const Role = db.role;
 
