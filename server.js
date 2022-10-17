@@ -47,6 +47,10 @@ function initial() {
   });
 }
 
+// Routes
+require("./Routes/authRoute");
+require("./Routes/userRoute");
+
 // Listen to server connection
 app.listen(PORT, () => {
   console.log(`Server is connected on ${PORT}`);
