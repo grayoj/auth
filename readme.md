@@ -1,1 +1,3 @@
-This is the auth component.
+# Auth.
+Simple authentication is js using JWT & Mongo DB
+
